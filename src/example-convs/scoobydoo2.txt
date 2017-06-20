@@ -1,0 +1,10 @@
+let [x36, x35] = initiate house daphne [x1, [x22, []]];
+let [x43, x42, x41, x40, x39, x38, x37] = finish_speaking_with_opinion house daphne positive fred 9 [x35, [x36, [x2, [x29, [x30, [x21, []]]]]]];
+let [x49, x48, x47, x46, x45, x44] = question_opinion house fred daphne positive 8 participant [x37, [x42, [x41, [x43, [x40, [x26, [(ungrudging []), []]]]]]]];
+let [x56, x55, x54, x53, x52, x51, x50] = begin_speaking_with_fact house velma fred contrarian haunted 7 [x44, [x31, [x34, [x28, [(ungrudging []), [x6, [x49, [x48, []]]]]]]]];
+let [x60, x59, x58, x57] = change_topic 6 house creaky_doors velma negative [x56, [x50, [(relevant []), [x54, [x7, [(strong []), []]]]]]];
+let [x67, x66, x65, x64, x63, x62, x61] = finish_speaking_with_opinion creaky_doors velma negative fred 5 [x59, [x57, [x58, [x51, [x52, [x60, []]]]]]];
+let [x74, x73, x72, x71, x70, x69, x68] = begin_speaking_with_fact creaky_doors daphne velma people_pleaser old 4 [x61, [x33, [x32, [x27, [(ungrudging []), [x8, [x64, [x67, []]]]]]]]];
+let [x81, x80, x79, x78, x77, x76, x75] = finish_speaking_with_opinion creaky_doors daphne neutral velma 3 [x68, [x72, [x11, [x69, [x70, [x74, []]]]]]];
+let [x87, x86, x85, x84, x83, x82] = question_opinion creaky_doors velma daphne neutral 2 contrarian [x75, [x80, [x79, [x81, [x78, [x53, [(ungrudging []), []]]]]]]];
+let [x93, x92, x91, x90, x89, x88] = question_opinion creaky_doors fred velma negative 1 participant [x82, [x66, [x65, [x86, [x87, [x45, [(ungrudging []), []]]]]]]];

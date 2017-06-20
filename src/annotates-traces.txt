@@ -1,0 +1,19 @@
+let [x40, x39] = initiate chair alice [x1, [x26, []]];
+Alice: "Let's talk about the chair..."
+
+let [x49, x48, x47, x46, x45, x44, x43, x42, x41] = interrupt chair carol contrarian 4 alice [x39, [x32, [x25, [(interruptive []), [x40, [x35, [x38, []]]]]]]];
+Carol: "Alice, I have something to say about the chair."
+
+let [x57, x56, x55, x54, x53, x52, x51, x50] = finish_speaking_with_opinion chair carol positive alice 3 [x41, [x47, [x9, [x43, [x44, [x49, []]]]]]];
+Carol: "I really like the chair, Alice."
+
+let [x60, x59, x58] = change_topic 2 alice table negative chair [x57, [x11, [x2, [x50, [x4, []]]]]];
+Alice: "Okay, well if we're done talking about the chair, let's talk about the table."
+
+let [x68, x67, x66, x65, x64, x63, x62, x61] = begin_speaking_with_fact table bob carol people_pleaser blue 1 [x59, [x37, [x36, [x31, [(ungrudging []), [x14, [x54, [x60, []]]]]]]]];
+Bob: "So, the table is blue..."
+
+let [x77, x76, x75, x74, x73, x72, x71, x70, x69] = interrupt table alice participant 0 bob [x61, [x30, [x68, [(interruptive []), [x66, [x34, [x33, []]]]]]]];
+Alice: "I have something to say about the table."
+
+

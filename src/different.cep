@@ -1,0 +1,33 @@
+
+
+nat : type.
+z : nat.
+s nat : nat.
+
+neq nat nat : bwd.
+neq z (s N).
+neq (s N) z.
+neq (s N) (s M)
+  <- neq N M.
+
+character : type.
+c nat : character.
+
+different character character : bwd.
+different (c N) (c M)
+  <- neq N M.
+
+
+stage main = {
+
+something : different C C' * ... -o likes C C'.
+
+
+}
+
+% Individual character are written as:
+% (c 1)
+% (c 2)
+
+
+

@@ -1,0 +1,287 @@
+character: type.
+alice : character.
+bob : character.
+carol : character.
+
+topic: type.
+chair: topic.
+table: topic.
+person character: topic.
+
+property: type.
+red: property.
+blue: property.
+
+sentiment: type.
+positive: sentiment.
+negative: sentiment.
+neutral: sentiment.
+
+opposite sentiment sentiment : bwd.
+opposite negative positive.
+
+scale sentiment sentiment : bwd.
+scale negative neutral.
+scale neutral positive.
+
+relevant topic topic: bwd.
+relevant table chair.
+relevant chair table.
+
+statement: type.
+fact topic property: statement.
+opinion topic sentiment: statement.
+
+feeling : type.
+encouraged : feeling.
+dejected : feeling.
+miffed : feeling.
+angry : feeling.
+content : feeling.
+
+archetype : type.
+contrarian : archetype. %argues for the sake of it
+people_pleaser : archetype. %speaks if person they like agrees
+reticent : archetype. %only speaks after others have
+participant : archetype. %speaks if they have an opinion
+
+%those who interrupt others
+interruptive archetype : bwd.
+interruptive participant.
+interruptive contrarian.
+
+%those who are willing to talk from the outset
+ungrudging archetype : bwd.
+ungrudging participant.
+ungrudging contrarian.
+ungrudging people_pleaser.
+
+nat : type.
+z : nat.
+s nat : nat.
+
+#builtin NAT nat.
+#builtin NAT_ZERO z.
+#builtin NAT_SUCC s.
+
+thinks character statement : pred.
+hears character character statement : pred.
+turns nat: pred.
+available topic: pred.
+germaine topic: pred.
+observable topic property: pred.
+is_speaking character : pred.
+finished_speaking character : pred.
+says character statement: pred.
+questions character character statement: pred.
+request character topic : pred.
+has_opinion character topic sentiment : pred.
+hears_opinion character topic sentiment : pred.
+hears_fact character topic property : pred.
+hears_question character character statement : pred.
+leader character : pred.
+listening character character : pred. %C' is listening to C
+interrupts character character : pred.
+is_interrupted character: pred.
+feels character feeling: pred.
+is character archetype : pred.
+
+context init = {
+  available chair,
+  available table,
+  thinks alice (opinion chair negative),
+  thinks alice (fact chair red),
+  thinks bob (opinion chair positive),
+  thinks bob (fact chair red),
+  thinks carol (opinion chair positive),
+  thinks carol (fact chair red),
+  thinks alice (opinion table negative),
+  thinks alice (fact table blue),
+  thinks bob (opinion table neutral),
+  thinks bob (fact table blue),
+  thinks carol (opinion table negative),
+  thinks carol (fact table blue), 
+  thinks alice (opinion (person bob) positive),
+  thinks alice (opinion (person carol) negative),
+  thinks bob (opinion (person alice) positive),
+  thinks bob (opinion (person carol) positive),
+  thinks carol (opinion (person alice) positive),
+  thinks carol (opinion (person bob) positive),
+  observable chair red,
+  observable table blue,
+  turns 10,
+  leader alice,
+  feels bob content,
+  feels alice content,
+  feels carol content,
+  is alice participant,
+  is bob people_pleaser,
+  is carol contrarian,
+  listening bob alice,
+  listening alice bob,
+  listening carol alice,
+  listening carol bob,
+  listening bob carol,
+  listening alice carol
+  }.
+
+  stage main = {
+
+  %%%Speaking rules
+
+  initiate :
+    available T * leader C -o germaine T * is_speaking C.
+
+  change_topic :
+    turns (s N) * $thinks C (opinion T S) * available T * germaine T' * 
+    relevant T T' 
+  -o
+    germaine T * turns N.
+
+ begin_speaking_with_opinion :
+    $germaine T * $listening C C' * $listening C' C * %make listening take 1 argument
+    $thinks C (opinion T S) * finished_speaking C' * $is C A * ungrudging A * turns (s N)
+  -o
+    is_speaking C * hears C' C (opinion T S) * turns N.
+
+begin_speaking_with_fact :
+    $germaine T * $listening C C' * $listening C' C * $is C A * %make listening take 1 argument
+    ungrudging A * $thinks C (fact T P) * finished_speaking C' * turns (s N)
+  -o
+    is_speaking C * hears C' C (fact T P) * turns N.
+
+
+encouraged_begin_speaking_with_opinion :
+    $germaine T * $listening C C' * $listening C' C * %make listening take 1 argument
+    $thinks C (opinion T S) * finished_speaking C' * feels C encouraged * turns (s N)
+  -o
+    is_speaking C * hears C' C (opinion T S) * turns N.
+
+encouraged_begin_speaking_with_fact :
+    $germaine T * $listening C C' * $listening C' C * feels C encouraged * 
+    $thinks C (fact T P) * finished_speaking C' * turns (s N)
+  -o
+    is_speaking C * hears C' C (fact T P) * turns N.
+
+finish_speaking_with_opinion :
+  $germaine T * is_speaking C * $thinks C (opinion T S) * 
+  $listening C C' * $listening C' C * turns (s N)
+ -o
+  finished_speaking C * says C (opinion T S) * hears C' C (opinion T S) *
+  turns N.
+
+finish_speaking_with_fact :
+  $germaine T * is_speaking C * $thinks C (fact T P) * 
+  $listening C C' * $listening C' C * turns (s N)
+ -o
+  finished_speaking C * says C (fact T P) * hears C' C (fact T P) * 
+  turns N.
+
+  interrupt:
+   $germaine T * $is C A * turns (s N) * interruptive A * is_speaking C' *
+   $listening C C' * $listening C' C
+ -o
+   interrupts C C' * is_interrupted C' * is_speaking C * feels C' miffed * turns N.
+
+    question_opinion: %reticent people don't ask questions
+    $germaine T * hears C' C (opinion T S) * says C (opinion T S) *
+    turns (s N) * finished_speaking C * $is C' A * ungrudging A 
+  -o
+    questions C' C (opinion T S) * hears_question C C' (opinion T S) * turns N *
+    finished_speaking C'.
+
+  question_fact:
+    $germaine T * hears C' C (fact T P) * says C (fact T P) *
+    $listening C C' * $listening C' C * turns (s N) * finished_speaking C *
+    $is C' A * ungrudging A 
+  -o
+    questions C' C (fact T P) * hears_question C C' (fact T P) * turns N *
+    finished_speaking C'.
+
+
+   cause_debate:
+    $germaine T * turns (s N) * $is C contrarian * hears C C'(opinion T S) * opposite S S' *
+    $listening C C' * $listening C' C
+  -o
+    says C (opinion T S') * hears C' C (opinion T S') * turns N.
+
+  %agreement for agreement's sake--opinion doesn't change
+  agree_to_please:
+    $germaine T * $is C people_pleaser * turns (s N) * hears C C'(opinion T S) *
+    $listening C C' * $listening C' C
+  -o
+    says C (opinion T S) * hears C' C (opinion T S) * turns N.
+
+  %reticent participation
+  speak_up:
+   $germaine T * turns (s N) * $is C reticent * feels C encouraged *
+   thinks C (opinion T S) * $listening C C' * $listening C' C
+ -o
+   says C (opinion T S) * hears C' C (opinion T S) * turns N * finished_speaking C.
+
+
+  %%%Belief change rules
+
+  negative_to_neutral_opinion:
+   $germaine T * thinks C (opinion T negative) * hears C C'(opinion T positive)
+  -o
+   thinks C (opinion T neutral).
+ 
+  neutral_to_positive_opinion:
+   $germaine T * thinks C (opinion T neutral) * hears C C'(opinion T positive) *
+   thinks C (opinion (person C') positive)
+  -o
+   thinks C (opinion T positive).
+
+  positive_to_neutral_opinion:
+   $germaine T * thinks C (opinion T positive) *
+   hears C C'(opinion T negative)
+  -o
+   thinks C (opinion T neutral).
+
+  neutral_to_negative_opinion_from_hearing_negative:
+    $germaine T * thinks C (opinion T neutral) * hears C C'(opinion T negative) *
+    thinks C (opinion (person C') positive)
+  -o
+    thinks C (opinion T negative).
+
+  %Hearing C' have a netural opinion can make C go from neutral to negative about a topic,
+  %but the same logic does not apply if C' is positive about a topic.
+  neutral_to_negative_opinion_from_hearing_neutral:
+    $germaine T * thinks C (opinion T neutral) * hears C C'(opinion T neutral) *
+    thinks C (opinion (person C') positive)
+  -o
+    thinks C (opinion T negative).
+
+
+%%% Feeling rules
+
+  sad_from_disagreement:
+    feels C content * $thinks C (opinion T S) * $hears C C'(opinion T S') * opposite S S' * 
+    $is C people_pleaser * $listening C C' * $listening C' C
+  -o
+    feels C dejected.
+
+  happy_from_agreement:
+    feels C content * $thinks C (opinion T S) * $hears C C'(opinion T S) * $is C people_pleaser *
+    $listening C C' * $listening C' C
+  -o
+    feels C encouraged.
+
+ desiring_to_speak:
+    hears C C'(opinion T S) * $is C reticent * hears C C'(fact T P) * $thinks C (opinion T S') *
+    $listening C C' * $listening C' C
+  -o
+    feels C encouraged.
+
+ upset_from_interruption:
+   feels C miffed * feels C miffed * $thinks C (opinion T S') *
+   $germaine T * $listening C C' * $listening C' C
+  -o
+   feels C angry.
+
+    }
+
+%#interactive main.
+
+#trace _ main init.

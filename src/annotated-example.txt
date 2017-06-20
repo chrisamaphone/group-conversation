@@ -1,0 +1,36 @@
+initiate chair alice [x1, [x24, []]];
+Alice: Let's begin our discussion of the chair.
+
+finish_speaking_with_fact chair alice red bob 9 [x37, [x38, [x4, [x32, [x31, [x23, []]]]]]];
+Alice: Bob, the chair is red.
+
+change_topic 8 alice table negative chair [x46, [x9, [x2, [x39, [(relevant []), []]]]]];
+Alice: But let's talk about the [awful] table instead.
+
+begin_speaking_with_fact table carol alice contrarian blue 7 [x48, [x33, [x36, [x30, [(ungrudging []), [x14, [x43, [x49, []]]]]]]]];
+Carol: Alice, the table is blue.
+
+finish_speaking_with_fact table carol blue alice 6 [x50, [x55, [x54, [x51, [x52, [x57, []]]]]]];
+Carol: Alice, the table is blue.
+
+question_fact table alice carol blue 5 participant [x58, [x64, [x63, [x60, [x61, [x65, [x62, [x28, [(ungrudging []), []]]]]]]]]];
+Alice: Carol, is the table really blue?
+
+begin_speaking_with_fact table bob alice people_pleaser blue 4 [x66, [x42, [x41, [x29, [(ungrudging []), [x12, [x73, [x72, []]]]]]]]];
+Bob: Alice, the table is blue.
+
+finish_speaking_with_fact table bob blue carol 3 [x74, [x79, [x78, [x35, [x34, [x81, []]]]]]];
+Bob: Carol, the table is blue.
+
+begin_speaking_with_opinion table alice bob negative participant 2 [x82, [x76, [x75, [x47, [x86, [x69, [(ungrudging []), [x89, []]]]]]]]];
+Alice: Bob, I don't like the table.
+
+finish_speaking_with_fact table alice blue carol 1 [x90, [x95, [x10, [x68, [x67, [x97, []]]]]]];
+Alice: Carol, the table is blue.
+
+begin_speaking_with_fact table bob alice people_pleaser blue 0 [x98, [x92, [x91, [x77, [(ungrudging []), [x83, [x102, [x105, []]]]]]]]];
+Bob: Alice, the table is blue.
+
+neutral_to_negative_opinion_from_hearing_negative table bob alice [x106, [x11, [x96, [x17, []]]]];
+Bob: I don't like the table as much.
+

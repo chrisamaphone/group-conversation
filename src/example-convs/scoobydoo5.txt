@@ -1,0 +1,13 @@
+let [x36, x35] = initiate house daphne [x1, [x22, []]];
+let [x40, x39, x38, x37] = change_topic 9 house murder daphne negative [x21, [x35, [(relevant []), [x36, [x13, [(strong []), []]]]]]];
+let [x49, x48, x47, x46, x45, x44, x43, x42, x41] = interrupt murder velma contrarian 8 daphne [x39, [x28, [x40, [(interruptive []), [x37, [x32, [x33, []]]]]]]];
+let [x58, x57, x56, x55, x54, x53, x52, x51, x50] = interrupt murder fred participant 7 velma [x41, [x26, [x49, [(interruptive []), [x47, [x34, [x31, []]]]]]]];
+let [x67, x66, x65, x64, x63, x62, x61, x60, x59] = interrupt murder velma contrarian 6 fred [x50, [x42, [x58, [(interruptive []), [x56, [x53, [x52, []]]]]]]];
+let [x76, x75, x74, x73, x72, x71, x70, x69, x68] = interrupt murder fred participant 5 velma [x59, [x51, [x67, [(interruptive []), [x65, [x62, [x61, []]]]]]]];
+let [x83, x82, x81, x80, x79, x78, x77] = finish_speaking_with_fact murder fred real velma 4 [x68, [x74, [x12, [x70, [x71, [x76, []]]]]]];
+let [x90, x89, x88, x87, x86, x85, x84] = begin_speaking_with_opinion murder daphne fred negative people_pleaser 3 [x77, [x29, [x30, [x38, [x80, [x27, [(ungrudging []), [x83, []]]]]]]]];
+let [x99, x98, x97, x96, x95, x94, x93, x92, x91] = interrupt murder velma contrarian 2 daphne [x84, [x60, [x90, [(interruptive []), [x88, [x43, [x44, []]]]]]]];
+let [x103, x102, x101, x100] = change_topic 1 murder house velma negative [x99, [x91, [(relevant []), [x97, [x3, [(strong []), []]]]]]];
+let [x108, x107, x106, x105, x104] = upset_from_interruption daphne house positive velma [x98, [x48, [x2, [x102, [x94, [x93, []]]]]]];
+let [x113, x112, x111, x110, x109] = upset_from_interruption velma house negative fred [x57, [x75, [x101, [x105, [x79, [x78, []]]]]]];
+let [x120, x119, x118, x117, x116, x115, x114] = finish_speaking_with_fact house velma haunted daphne 0 [x110, [x100, [x6, [x107, [x106, [x103, []]]]]]];

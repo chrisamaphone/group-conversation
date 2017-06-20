@@ -1,0 +1,10 @@
+let [x36, x35] = initiate house daphne [x1, [x22, []]];
+let [x45, x44, x43, x42, x41, x40, x39, x38, x37] = interrupt house fred participant 9 daphne [x35, [x26, [x21, [(interruptive []), [x36, [x30, [x29, []]]]]]]];
+let [x52, x51, x50, x49, x48, x47, x46] = finish_speaking_with_fact house fred old daphne 8 [x37, [x43, [x4, [x39, [x40, [x45, []]]]]]];
+let [x59, x58, x57, x56, x55, x54, x53] = begin_speaking_with_opinion house daphne fred positive people_pleaser 7 [x46, [x48, [x47, [x2, [x49, [x27, [(ungrudging []), [x52, []]]]]]]]];
+let [x68, x67, x66, x65, x64, x63, x62, x61, x60] = interrupt house fred participant 6 daphne [x53, [x38, [x59, [(interruptive []), [x57, [x55, [x54, []]]]]]]];
+let [x75, x74, x73, x72, x71, x70, x69] = finish_speaking_with_opinion house fred positive velma 5 [x60, [x66, [x5, [x34, [x31, [x68, []]]]]]];
+let [x82, x81, x80, x79, x78, x77, x76] = begin_speaking_with_opinion house velma fred negative contrarian 4 [x69, [x71, [x70, [x3, [x72, [x28, [(ungrudging []), [x75, []]]]]]]]];
+let [x89, x88, x87, x86, x85, x84, x83] = finish_speaking_with_fact house velma haunted fred 3 [x76, [x80, [x6, [x77, [x78, [x82, []]]]]]];
+let [x97, x96, x95, x94, x93, x92, x91, x90] = question_fact house fred velma haunted 2 participant [x83, [x88, [x87, [x84, [x85, [x89, [x86, [x61, [(ungrudging []), []]]]]]]]]];
+let [x103, x102, x101, x100, x99, x98] = question_opinion house velma fred positive 1 contrarian [x90, [x74, [x73, [x96, [x97, [x79, [(ungrudging []), []]]]]]]];
